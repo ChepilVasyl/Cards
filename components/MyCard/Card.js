@@ -3,9 +3,10 @@ import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import ImageOne from "../../assets/images/man.jpg";
 export default function Card({widthProp}) {
     const [text,setText] = useState('Електронна адреса@')
-    const handleFunc = () => {
-        setText('Змінили текст')
+    const changeButton = () => {
+        setColorButton(prev => !prev)
     }
+    const [colorButton,setColorButton] = useState(true)
     const dynamicWidth = widthProp*0.95
     return (
         <View style={[{width: dynamicWidth},styles.forCard]}>
@@ -17,8 +18,11 @@ export default function Card({widthProp}) {
                     <Text>Посада</Text>
                 </View>
             </View>
-            <TouchableOpacity style={styles.forButton}>
-                <Text style={{color:'white',fontWeight:'bold'}}>Підписатися</Text>
+            <TouchableOpacity style={[
+                styles.forButton,
+            {backgroundColor: colorButton ? 'blue' : 'red'},]
+            } onPress={changeButton}>
+                <Text style={{color:'white',fontWeight:'bold'}} >{colorButton ? 'Підписатися' : "Відписатися"}</Text>
             </TouchableOpacity>
         </View>
     )
